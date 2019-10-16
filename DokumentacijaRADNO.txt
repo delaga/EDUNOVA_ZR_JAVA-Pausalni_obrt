@@ -1,0 +1,13 @@
+treba još napraviti ....
+1.ViewRacun->Stavke:dodavanje, uklanjane,promjena
+           ->Spremi
+           ->Ispiši
+           ->obriši
+
+2. Exporti: Excell ->https://plaviured.hr/documents/izrada-racuna-pausal-2019.xlsx
+
+3. Nakon novi Racun kada se popuni prozor i spremi-> disspose() ali u Glavni ucita sa novim
+
+4. kod Novi racun da automatski kreira Broj racuna u zeljenom formatu
+
+5. PodaciOObrtu -> Spremi ali u isti

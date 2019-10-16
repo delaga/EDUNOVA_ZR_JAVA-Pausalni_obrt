@@ -1,0 +1,23 @@
+Dio I
+Ubaci cijelu stavku kao i racun pa si rješio Stavke
+repaint
+kao Predavaci an grupi tako in Stavke na racun
+Za View sto zeza ->PreferedSize i Size
+
+Dio II
+Novi racun: dodaj stavka
+            izdao korisnik
+            iznos odmah nakon kolicine i preracunaj poslje rabat(refresh), if null then 0
+              onKeyup promjena Iznosa, kodUnosa(Enter)
+            automatska numeracija broja racuna
+              
+edit racun: gdje je kupac?
+  sad kad je ok naptavi kao stavku
+  
+Entitet: if(vK==null) then vK = vP
+          else promjeni vP
+          
+   podaci o serveru
+   
+   
+   sve double u BigDecimal

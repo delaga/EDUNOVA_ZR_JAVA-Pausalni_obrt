@@ -24,7 +24,9 @@ public class Korisnik extends Entitet implements Serializable {
         private String mobitel;
         private String potpis_URL;
         private boolean admin;
-
+        
+        
+        
     public boolean isAdmin() {
         return admin;
     }

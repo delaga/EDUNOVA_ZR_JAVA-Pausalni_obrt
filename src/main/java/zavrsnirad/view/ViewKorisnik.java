@@ -226,7 +226,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
         try {
             k = obrada.spremi(k);
         } catch (DelagaException e) {
-            System.out.println(e.getPoruka());
+            e.printStackTrace();
         }
         
         

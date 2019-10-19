@@ -18,7 +18,7 @@ import zavrsnirad.view.SplashScreen;
  */
 public class Start {
     public static void main(String[] args) {
-        //TestKorisnik.test();
+       // TestKorisnik.test();
         new SplashScreen().setVisible(true);
         
     }

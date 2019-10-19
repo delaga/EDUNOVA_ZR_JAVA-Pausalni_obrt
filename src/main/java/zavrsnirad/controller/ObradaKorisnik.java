@@ -86,8 +86,7 @@ public class ObradaKorisnik extends Obrada<Korisnik>{
     }
     public Korisnik getKorisnik(String email){
         
-        return (Korisnik)session.createQuery("from Korisnik a where a.email=:email ")
-                .setParameter("email", email).uniqueResult();
+        return (Korisnik)session.createQuery("from Korisnik a where a.email=:email ").setParameter("email", email).uniqueResult();
         
         
     }

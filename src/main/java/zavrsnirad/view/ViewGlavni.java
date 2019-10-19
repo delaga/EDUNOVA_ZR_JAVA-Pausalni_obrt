@@ -22,8 +22,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
+import zavrsnirad.controller.ObradaKorisnik;
 import zavrsnirad.controller.ObradaRacun;
 import zavrsnirad.model.Klijent_kupac;
+import zavrsnirad.model.Korisnik;
 import zavrsnirad.model.Racun;
 import zavrsnirad.utility.Utils;
 
@@ -35,6 +37,10 @@ public class ViewGlavni extends javax.swing.JFrame {
     
     private ObradaRacun obrada;
     private Racun odabraniRacun;
+    private Korisnik trenutniKorisnik;
+
+    
+    
     
     public Racun getOdabraniRacun() {
         return odabraniRacun;
@@ -45,7 +51,9 @@ public class ViewGlavni extends javax.swing.JFrame {
      */
     public ViewGlavni() {
         initComponents();
+        
         new Vrijeme().start();
+        
         tblRacuni.setDefaultEditor(Object.class, null);
         obrada = new ObradaRacun();
         ucitaj();
@@ -455,7 +463,9 @@ public void ucitaj() {
         int broj = Integer.parseInt(djelovi[0]);
         SimpleDateFormat df = new SimpleDateFormat("YYYY");
         String br = "000" + ++broj;
+        
         odabraniRacun.setBroj_racuna(br.substring(br.length()-3) + "-" + df.format(new Date()));
+        odabraniRacun.setKorisnik(trenutniKorisnik);
         new ViewRacun(this).setVisible(true);
     }//GEN-LAST:event_btnNoviRačunActionPerformed
     

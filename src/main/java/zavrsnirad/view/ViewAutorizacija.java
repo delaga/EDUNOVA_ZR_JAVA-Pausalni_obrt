@@ -20,12 +20,15 @@ import zavrsnirad.utility.Utils;
  */
 public class ViewAutorizacija extends javax.swing.JFrame {
 
+    public ObradaKorisnik obrada;
+    public Korisnik trenutniKorisnik;
+
     /**
      * Creates new form Autorizacija
      */
     public ViewAutorizacija() {
         initComponents();
-        if(Utils.isDev()){
+        if (Utils.isDev()) {
             txtEmail.setText("mirza@ping.com.hr");
             psvLozinka.setText("123");
         }
@@ -104,47 +107,42 @@ public class ViewAutorizacija extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-//         if(txtEmail.getText().trim().length()==0){
-//            greska(txtEmail, "Email obavezan");
-//            return;
-//        }
-//        //factory pattern
-//        EmailValidator emailValidator = EmailValidator.getInstance();
-//        if(!emailValidator.isValid(txtEmail.getText())){
-//            greska(txtEmail,"Obavezan unos valjane email adrese");
-//            return;
-//        }
-//        
-//        txtEmail.setBackground(Color.WHITE);
-//        txtEmail.setForeground(Color.BLACK);
-//        
-//        if(psvLozinka.getPassword().length==0){
-//            greska(psvLozinka, "Lozinka obavezno");
-//            return;
-//        }
-//        
-//        psvLozinka.setBackground(Color.WHITE);
-//        psvLozinka.setForeground(Color.BLACK);
-//        
-//        
-//        Korisnik k = new ObradaKorisnik().getKorisnik(txtEmail.getText());
-//        
-//        if(k==null){
-//            JOptionPane.showMessageDialog(null, "Ne postojeći email");
-//            txtEmail.requestFocus();
-//            return;
-//        }
-//        System.out.println(psvLozinka.getPassword());
-//        System.out.println(k.getLozinka());
-//        
-//        
-//        if(!BCrypt.checkpw(new String(psvLozinka.getPassword()),k.getLozinka())){
+
+        if (txtEmail.getText().trim().length() == 0) {
+            greska(txtEmail, "Email obavezan");
+            return;
+        }
+        //factory pattern
+        EmailValidator emailValidator = EmailValidator.getInstance();
+        if (!emailValidator.isValid(txtEmail.getText())) {
+            greska(txtEmail, "Obavezan unos valjane email adrese");
+            return;
+        }
+
+        txtEmail.setBackground(Color.WHITE);
+        txtEmail.setForeground(Color.BLACK);
+
+        if (psvLozinka.getPassword().length == 0) {
+            greska(psvLozinka, "Lozinka obavezno");
+            return;
+        }
+
+        psvLozinka.setBackground(Color.WHITE);
+        psvLozinka.setForeground(Color.BLACK);
+        ObradaKorisnik obrada=new ObradaKorisnik();
+           Korisnik trenutniKorisnik= obrada.getKorisnik(txtEmail.getText());
+           
+        
+
+       
+//        if(!BCrypt.checkpw(new String(psvLozinka.getPassword()),trenutniKorisnik.getLozinka())){
 //            JOptionPane.showMessageDialog(null,"Kombinacija email i lozinka ne odgovara");
 //            psvLozinka.requestFocus();
 //            return;
 //        }
-        
+
         new ViewGlavni().setVisible(true);
+        
         dispose();
     }//GEN-LAST:event_btnSubmitActionPerformed
     
@@ -157,7 +155,7 @@ public class ViewAutorizacija extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;

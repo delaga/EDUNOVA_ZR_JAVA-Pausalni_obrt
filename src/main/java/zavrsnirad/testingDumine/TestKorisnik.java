@@ -16,23 +16,27 @@ import zavrsnirad.utility.DelagaException;
  */
 public class TestKorisnik {
        public static void test() {
-        Korisnik k = new Korisnik();
-        k.setIme("Mirza");
-        k.setPrezime("Delagić");
-        k.setEmail("mirza@ping.com.hr");
-        k.setLozinka(BCrypt.hashpw("123", BCrypt.gensalt()));
-        k.setAdmin(true);
-        k.setMobitel("0914510004");
-        
-           System.out.println(k.getLozinka());
-           ObradaKorisnik obrada = new ObradaKorisnik();
-        try {
-            k = obrada.spremi(k);
-        } catch (DelagaException e) {
-            System.out.println(e.getPoruka());
-        }
-
-        System.out.println(k.getId());
+           
+           ObradaKorisnik obrada=new ObradaKorisnik();
+           Korisnik k= obrada.getKorisnik("mirza@ping.com.hr");
+           System.out.println(k.getPrezime());
+//        Korisnik k = new Korisnik();
+//        k.setIme("Mirza");
+//        k.setPrezime("Delagić");
+//        k.setEmail("mirza@ping.com.hr");
+//        k.setLozinka(BCrypt.hashpw("123", BCrypt.gensalt()));
+//        k.setAdmin(true);
+//        k.setMobitel("0914510004");
+//        
+//           System.out.println(k.getLozinka());
+//           ObradaKorisnik obrada = new ObradaKorisnik();
+//        try {
+//            k = obrada.spremi(k);
+//        } catch (DelagaException e) {
+//            System.out.println(e.getPoruka());
+//        }
+//
+//        System.out.println(k.getId());
 
     }
 }

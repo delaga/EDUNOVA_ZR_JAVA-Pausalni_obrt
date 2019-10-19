@@ -7,19 +7,28 @@ package zavrsnirad.view;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import zavrsnirad.controller.ObradaKlijent_kupac;
+import zavrsnirad.controller.ObradaKorisnik;
+import zavrsnirad.controller.ObradaRacun;
 import zavrsnirad.controller.ObradaStavka;
 import zavrsnirad.controller.ObradaUsluga_proizvod;
 import zavrsnirad.model.Klijent_kupac;
+import zavrsnirad.model.Korisnik;
 import zavrsnirad.model.Racun;
 import zavrsnirad.model.Stavka;
 import zavrsnirad.model.Usluga_proizvod;
+import zavrsnirad.utility.DelagaException;
+import zavrsnirad.view.ViewAutorizacija;
 
 /**
  *
@@ -29,8 +38,10 @@ public class ViewRacun extends javax.swing.JFrame {
 
     private ViewGlavni glavni;
     private Racun r;
-    private ObradaStavka obrada;
-
+    private ObradaStavka obradaStavka;
+    private ObradaRacun obradaRacun;
+    private ObradaKorisnik obradaKorisnik;
+    private Korisnik trenutniKorisnik;
     /**
      * Creates new form ViewRacun
      */
@@ -53,6 +64,13 @@ public class ViewRacun extends javax.swing.JFrame {
             tc.setWidth(0);
             tc.setMinWidth(0);
             tc.setMaxWidth(0);
+            
+            txtIzdaoKorisnik.setText(trenutniKorisnik.getPrezime());
+            
+            
+            
+            
+            
 
         } else {
             ucitajRacun();
@@ -201,6 +219,8 @@ public class ViewRacun extends javax.swing.JFrame {
         txtfNapomena.setColumns(20);
         txtfNapomena.setRows(5);
         jScrollPane1.setViewportView(txtfNapomena);
+
+        txtIzdaoKorisnik.setEditable(false);
 
         rbtUslugeDomaci.setSelected(true);
         rbtUslugeDomaci.setText("Usluge:Domaći");
@@ -469,45 +489,46 @@ public class ViewRacun extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(rbtUslugeInozemni)
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbtRobaInozemni)
-                            .addComponent(rbtRobaDomaci)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rbtUslugeDomaci)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dtcDatumDospijeca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(rbtUslugeInozemni)
+                                .addGap(8, 8, 8)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dtcDatumIsporuke, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rbtRobaInozemni)
+                                    .addComponent(rbtRobaDomaci)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(rbtUslugeDomaci)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIzdaoKorisnik, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNacinPlacanja, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 152, Short.MAX_VALUE))))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtBrojRacuna, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbKlijentKupac, javax.swing.GroupLayout.Alignment.LEADING, 0, 221, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(dtcDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(timeVrijemeIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtNacinPlacanja, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(dtcDatumIsporuke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                        .addComponent(dtcDatumDospijeca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtBrojRacuna, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbKlijentKupac, javax.swing.GroupLayout.Alignment.LEADING, 0, 221, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(dtcDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(timeVrijemeIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 14, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -671,13 +692,34 @@ public class ViewRacun extends javax.swing.JFrame {
 
     private void btnSpremiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
         //provjera da li racun postoji
+        
         //upozori ako je isti broj
         //ako nije spremi ga sa novim brojem
-        r.setBroj_racuna(txtBrojRacuna.getText());
-        r.setDatum_dospijeca((Date) dtcDatumDospijeca.getDate());
-        r.setDatum_isporuke((Date) dtcDatumIsporuke.getDate());
-        r.setDatum_izdavanja((Date) dtcDatumIzdavanja.getDate());
-        r.setVrijemeIzdavanja(Time.valueOf(timeVrijemeIzdavanja.getTime()));
+        
+        this.r.setBroj_racuna(txtBrojRacuna.getText());
+        this.r.setDatum_dospijeca(new java.sql.Date(dtcDatumDospijeca.getDate().getTime()));
+        this.r.setDatum_isporuke( new java.sql.Date(dtcDatumIsporuke.getDate().getTime()));
+        this.r.setDatum_izdavanja(new java.sql.Date(dtcDatumIzdavanja.getDate().getTime()));
+        this.r.setVrijemeIzdavanja(Time.valueOf(timeVrijemeIzdavanja.getTime()));
+        this.r.setKorisnik(trenutniKorisnik);
+        this.r.setKlijent_kupac((Klijent_kupac) cmbKlijentKupac.getSelectedItem());
+        this.r.setNacin_placanja(txtNacinPlacanja.getText());
+        this.r.setNapomena(txtfNapomena.getText());
+        this.r.setVrstaRacuna(1);
+        List<Stavka> stavke=new ArrayList<>();
+        int brojRedova=tblStavke.getModel().getRowCount();
+        for(int i=0; i<brojRedova;i++){
+            stavke.add((Stavka) tblStavke.getModel().getValueAt(i, 0)) ;
+        }
+        
+        
+        this.r.setStavke(stavke);
+        
+        try {
+            obradaRacun.spremi(r);
+        } catch (DelagaException ex) {
+            ex.printStackTrace();
+        }
         //na kraju
         glavni.ucitaj();
         dispose();

@@ -8,6 +8,7 @@ package zavrsnirad.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -25,7 +26,16 @@ public class Racun extends Entitet implements Serializable{
         @ManyToOne
 	private Klijent_kupac klijent_kupac;
 	private Date datum_izdavanja;
-	private Date datum_dospijeca;
+        private Time vrijemeIzdavanja;
+
+    public Time getVrijemeIzdavanja() {
+        return vrijemeIzdavanja;
+    }
+
+    public void setVrijemeIzdavanja(Time vrijemeIzdavanja) {
+        this.vrijemeIzdavanja = vrijemeIzdavanja;
+    }
+        private Date datum_dospijeca;
 	private Date datum_isporuke;
         @ManyToOne
 	private Korisnik korisnik;

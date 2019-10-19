@@ -5,6 +5,9 @@
  */
 package zavrsnirad.view;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -60,7 +63,9 @@ public class ViewRacun extends javax.swing.JFrame {
 
     private void ucitajRacun() {
         txtBrojRacuna.setText(r.getBroj_racuna());
-        dtcVrijemeIzdavanja.setDateTimePermissive(r.getDatum_izdavanja().toLocalDate().atStartOfDay());
+        //dtcVrijemeIzdavanja.setDateTimePermissive(r.getDatum_izdavanja().toLocalDate().atStartOfDay());
+        dtcDatumIzdavanja.setDate(r.getDatum_izdavanja());
+        timeVrijemeIzdavanja.setTime(r.getVrijemeIzdavanja().toLocalTime());
         dtcDatumIsporuke.setDate(r.getDatum_isporuke());
         txtIzdaoKorisnik.setText(r.getKorisnik().getPrezime());
 
@@ -161,7 +166,8 @@ public class ViewRacun extends javax.swing.JFrame {
         btnStavkaObrisi = new javax.swing.JButton();
         txtUkupno = new javax.swing.JTextField();
         cmbKlijentKupac = new javax.swing.JComboBox<>();
-        dtcVrijemeIzdavanja = new com.github.lgooddatepicker.components.DateTimePicker();
+        timeVrijemeIzdavanja = new com.github.lgooddatepicker.components.TimePicker();
+        dtcDatumIzdavanja = new com.toedter.calendar.JDateChooser();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -494,10 +500,14 @@ public class ViewRacun extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtBrojRacuna, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbKlijentKupac, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dtcVrijemeIzdavanja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtBrojRacuna, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbKlijentKupac, javax.swing.GroupLayout.Alignment.LEADING, 0, 221, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(dtcDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(timeVrijemeIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -536,10 +546,11 @@ public class ViewRacun extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(cmbKlijentKupac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(dtcVrijemeIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
+                                    .addComponent(timeVrijemeIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dtcDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(dtcDatumDospijeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -663,7 +674,10 @@ public class ViewRacun extends javax.swing.JFrame {
         //upozori ako je isti broj
         //ako nije spremi ga sa novim brojem
         r.setBroj_racuna(txtBrojRacuna.getText());
-
+        r.setDatum_dospijeca((Date) dtcDatumDospijeca.getDate());
+        r.setDatum_isporuke((Date) dtcDatumIsporuke.getDate());
+        r.setDatum_izdavanja((Date) dtcDatumIzdavanja.getDate());
+        r.setVrijemeIzdavanja(Time.valueOf(timeVrijemeIzdavanja.getTime()));
         //na kraju
         glavni.ucitaj();
         dispose();
@@ -775,7 +789,7 @@ public class ViewRacun extends javax.swing.JFrame {
     private javax.swing.JComboBox<Usluga_proizvod> cmbStavkaNaziv;
     private com.toedter.calendar.JDateChooser dtcDatumDospijeca;
     private com.toedter.calendar.JDateChooser dtcDatumIsporuke;
-    private com.github.lgooddatepicker.components.DateTimePicker dtcVrijemeIzdavanja;
+    private com.toedter.calendar.JDateChooser dtcDatumIzdavanja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -806,6 +820,7 @@ public class ViewRacun extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtUslugeInozemni;
     private javax.swing.JSpinner spnStavkaKolicina;
     private javax.swing.JTable tblStavke;
+    private com.github.lgooddatepicker.components.TimePicker timeVrijemeIzdavanja;
     private javax.swing.JTextField txtBrojRacuna;
     private javax.swing.JTextField txtIzdaoKorisnik;
     private javax.swing.JTextField txtNacinPlacanja;

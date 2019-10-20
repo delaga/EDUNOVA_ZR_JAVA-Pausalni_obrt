@@ -26,7 +26,7 @@ public abstract  class Obrada<T extends Entitet> {
         this.session = HibernateUtil.getSession();
     }
     public T spremi(T entitet) throws DelagaException{
-        kontrolaSpremi(entitet);
+        //kontrolaSpremi(entitet);
         if(entitet.getVrijemeKreiranja()==null){
             entitet.setVrijemePromjene(new Date());
             entitet.setVrijemePromjene(new Date());

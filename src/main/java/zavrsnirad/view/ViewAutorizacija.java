@@ -129,8 +129,8 @@ public class ViewAutorizacija extends javax.swing.JFrame {
 
         psvLozinka.setBackground(Color.WHITE);
         psvLozinka.setForeground(Color.BLACK);
-        ObradaKorisnik obrada=new ObradaKorisnik();
-           Korisnik trenutniKorisnik= obrada.getKorisnik(txtEmail.getText());
+        
+           
            
         
 
@@ -140,8 +140,10 @@ public class ViewAutorizacija extends javax.swing.JFrame {
 //            psvLozinka.requestFocus();
 //            return;
 //        }
-
-        new ViewGlavni().setVisible(true);
+        ObradaKorisnik obrada=new ObradaKorisnik();
+           Korisnik trenutniKorisnik= obrada.getKorisnik("mirza@ping.com.hr");
+           System.out.println(trenutniKorisnik.getPrezime());
+        new ViewGlavni(trenutniKorisnik).setVisible(true);
         
         dispose();
     }//GEN-LAST:event_btnSubmitActionPerformed

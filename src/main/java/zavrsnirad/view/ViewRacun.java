@@ -49,23 +49,29 @@ public class ViewRacun extends javax.swing.JFrame {
         initComponents();
         this.glavni = r;
         this.r = glavni.getOdabraniRacun();
-
+        
         ucitajUsluge();
         ucitajKlijenteKupce();
 
+        System.out.println(this.r.getKorisnik().getEmail());
+        
         ButtonGroup group = new ButtonGroup();
         group.add(rbtRobaDomaci);
         group.add(rbtRobaInozemni);
         group.add(rbtUslugeDomaci);
         group.add(rbtUslugeInozemni);
         if (this.r.getId() == null) {
+            
+            
+            
             txtBrojRacuna.setText(this.r.getBroj_racuna());
+            txtIzdaoKorisnik.setText(this.r.getKorisnik().getPrezime());
             TableColumn tc = tblStavke.getColumnModel().getColumn(0);
             tc.setWidth(0);
             tc.setMinWidth(0);
             tc.setMaxWidth(0);
             
-            txtIzdaoKorisnik.setText(trenutniKorisnik.getPrezime());
+            //txtIzdaoKorisnik.setText(trenutniKorisnik.getPrezime());
             
             
             
@@ -95,7 +101,7 @@ public class ViewRacun extends javax.swing.JFrame {
         List<Stavka> stavke = r.getStavke();
         String[] colNames = {"objekt", "Naziv", "Jed. mj.", "Cijena", "Kolićina", "Rabat", "Iznos"};
         for (int i = 0; i < colNames.length; i++) {
-
+            
             TableColumn tc = tblStavke.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
             if (i == 0) {
@@ -701,7 +707,9 @@ public class ViewRacun extends javax.swing.JFrame {
         this.r.setDatum_isporuke( new java.sql.Date(dtcDatumIsporuke.getDate().getTime()));
         this.r.setDatum_izdavanja(new java.sql.Date(dtcDatumIzdavanja.getDate().getTime()));
         this.r.setVrijemeIzdavanja(Time.valueOf(timeVrijemeIzdavanja.getTime()));
-        this.r.setKorisnik(trenutniKorisnik);
+        
+        System.out.println(r.getKorisnik().getIme());
+        
         this.r.setKlijent_kupac((Klijent_kupac) cmbKlijentKupac.getSelectedItem());
         this.r.setNacin_placanja(txtNacinPlacanja.getText());
         this.r.setNapomena(txtfNapomena.getText());

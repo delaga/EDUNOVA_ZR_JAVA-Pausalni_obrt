@@ -23,7 +23,7 @@ public class ObradaRacun extends Obrada<Racun>{
 
     @Override
     protected void kontrolaSpremi(Racun entitet) throws DelagaException {
-        
+       
     }
 
     @Override
@@ -35,5 +35,7 @@ public class ObradaRacun extends Obrada<Racun>{
     public List<Racun> getEntiteti() {
         return session.createQuery("from Racun").list();
     }
+
+    
     
 }

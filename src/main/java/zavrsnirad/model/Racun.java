@@ -42,6 +42,15 @@ public class Racun extends Entitet implements Serializable{
 	private String napomena;
 	private String nacin_placanja;
         private Integer vrstaRacuna;
+        private boolean aktivan;
+
+    public boolean isAktivan() {
+        return aktivan;
+    }
+
+    public void setAktivan(boolean aktivan) {
+        this.aktivan = aktivan;
+    }
         
         @OneToMany(mappedBy = "racun")
     private List<Stavka> stavke = new ArrayList<>();
@@ -68,19 +77,22 @@ public class Racun extends Entitet implements Serializable{
         super();
     }
 
-    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Integer vrstaRacuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Time vrijemeIzdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Integer vrstaRacuna, boolean aktivan, Integer Id, java.util.Date vrijemeKreiranja, java.util.Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.broj_racuna = broj_racuna;
         this.klijent_kupac = klijent_kupac;
         this.datum_izdavanja = datum_izdavanja;
+        this.vrijemeIzdavanja = vrijemeIzdavanja;
         this.datum_dospijeca = datum_dospijeca;
         this.datum_isporuke = datum_isporuke;
         this.korisnik = korisnik;
         this.napomena = napomena;
         this.nacin_placanja = nacin_placanja;
         this.vrstaRacuna = vrstaRacuna;
+        this.aktivan = aktivan;
     }
 
+    
     
 
     public String getBroj_racuna() {

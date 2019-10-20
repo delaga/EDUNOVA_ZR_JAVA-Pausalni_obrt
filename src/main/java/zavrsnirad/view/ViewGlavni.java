@@ -37,7 +37,11 @@ public class ViewGlavni extends javax.swing.JFrame {
     
     private ObradaRacun obrada;
     private Racun odabraniRacun;
-    private Korisnik trenutniKorisnik;
+    public Korisnik trenKorisnik;
+
+    public Korisnik getTrenutniKorisnik() {
+        return trenKorisnik;
+    }
 
     
     
@@ -49,9 +53,10 @@ public class ViewGlavni extends javax.swing.JFrame {
     /**
      * Creates new form Glavni
      */
-    public ViewGlavni() {
+    public ViewGlavni(Korisnik trenutniKorisnik) {
         initComponents();
-        
+        System.out.println(trenutniKorisnik.getEmail());
+        this.trenKorisnik=trenutniKorisnik;
         new Vrijeme().start();
         
         tblRacuni.setDefaultEditor(Object.class, null);
@@ -465,7 +470,9 @@ public void ucitaj() {
         String br = "000" + ++broj;
         
         odabraniRacun.setBroj_racuna(br.substring(br.length()-3) + "-" + df.format(new Date()));
-        odabraniRacun.setKorisnik(trenutniKorisnik);
+        System.out.println(this.trenKorisnik.getEmail()+"prije dodjeljivanja na odabraniRacun");
+        odabraniRacun.setKorisnik(this.trenKorisnik);
+        System.out.println(this.odabraniRacun.getKorisnik().getIme()+" na kraju ViewGlavni");
         new ViewRacun(this).setVisible(true);
     }//GEN-LAST:event_btnNoviRačunActionPerformed
     

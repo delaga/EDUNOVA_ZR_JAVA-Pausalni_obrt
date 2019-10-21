@@ -6,6 +6,7 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Usluga_proizvod extends Entitet implements Serializable{
 	private String naziv;
 	private String opis;
 	private String jedinica_mjere;
-	private Double cijena;
+	private BigDecimal cijena;
 
     public Usluga_proizvod() {
         super();
@@ -32,7 +33,7 @@ public class Usluga_proizvod extends Entitet implements Serializable{
         return  naziv;
     }
 
-    public Usluga_proizvod(String naziv, String opis, String jedinica_mjere, Double cijena, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Usluga_proizvod(String naziv, String opis, String jedinica_mjere, BigDecimal cijena, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.naziv = naziv;
         this.opis = opis;
@@ -64,11 +65,11 @@ public class Usluga_proizvod extends Entitet implements Serializable{
         this.jedinica_mjere = jedinica_mjere;
     }
 
-    public Double getCijena() {
+    public BigDecimal getCijena() {
         return cijena;
     }
 
-    public void setCijena(Double cijena) {
+    public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
 

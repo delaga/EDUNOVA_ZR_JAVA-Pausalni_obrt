@@ -6,6 +6,7 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -21,21 +22,21 @@ public class Stavka extends Entitet implements Serializable {
     private Usluga_proizvod proizvod;
     @ManyToOne
     private Racun racun;
-    private double rabat;
-    private double kolicina;
-    private double iznosStavke;
+    private BigDecimal rabat;
+    private BigDecimal kolicina;
+    private BigDecimal iznosStavke;
 
     @Override
     public String toString() {
         return "" + iznosStavke ;
     }
 
-    public double getIznosStavke() {
-        Double iznosStavke = getKolicina() * getProizvod().getCijena()*((100-getRabat())/100);
+    public BigDecimal getIznosStavke() {
+        BigDecimal iznosStavke = getKolicina() * getProizvod().getCijena()*((100-getRabat())/100);
         return iznosStavke;
     }
 
-    public void setIznosStavke(double iznosStavke) {
+    public void setIznosStavke(BigDecimal iznosStavke) {
         this.iznosStavke = iznosStavke;
     }
 
@@ -47,7 +48,7 @@ public class Stavka extends Entitet implements Serializable {
         super();
     }
 
-    public Stavka(Usluga_proizvod proizvod, Racun racun, double rabat, double kolicina, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Stavka(Usluga_proizvod proizvod, Racun racun, BigDecimal rabat, BigDecimal kolicina, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.proizvod = proizvod;
         this.racun = racun;
@@ -71,19 +72,19 @@ public class Stavka extends Entitet implements Serializable {
         this.racun = racun;
     }
 
-    public double getRabat() {
+    public BigDecimal getRabat() {
         return rabat;
     }
 
-    public void setRabat(double rabat) {
+    public void setRabat(BigDecimal rabat) {
         this.rabat = rabat;
     }
 
-    public double getKolicina() {
+    public BigDecimal getKolicina() {
         return kolicina;
     }
 
-    public void setKolicina(double kolicina) {
+    public void setKolicina(BigDecimal kolicina) {
         this.kolicina = kolicina;
     }
 

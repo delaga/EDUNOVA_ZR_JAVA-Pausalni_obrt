@@ -21,7 +21,11 @@ import zavrsnirad.model.Klijent_kupac;
 public class ViewKlijentiLista extends javax.swing.JFrame {
     
     private ObradaKlijent_kupac obrada;
+    public ViewKlijentiLista klijenti;
 
+    public ViewKlijentiLista getKlijenti() {
+        return klijenti;
+    }
     /**
      * Creates new form ViewKlijentiLista
      */
@@ -127,12 +131,20 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviActionPerformed
-        new ViewKlijentKupac().setVisible(true);
+        
+        new ViewKlijentKupac(this).setVisible(true);
     }//GEN-LAST:event_btnNoviActionPerformed
-private void ucitaj() {
+
+    public void setKlijenti(ViewKlijentiLista klijenti) {
+        this.klijenti = klijenti;
+    }
+public void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
+        //tblKupci.repaint();
+        
         DefaultTableModel dtm = (DefaultTableModel) tblKupci.getModel();
-        List<Klijent_kupac> kupci=obrada.getEntiteti();
+        //dtm.fireTableDataChanged();
+        List<Klijent_kupac>kupci=obrada.getEntiteti();
         String[] colNames = {"Naziv", "Adresa", "Poštanski broj", "Grad", "Država", "OIB ili JMBG","Vrijeme kreiranja","Vrijeme promjene"};
         for (int i = 0; i < colNames.length; i++) {
 
@@ -160,7 +172,12 @@ private void ucitaj() {
             }
 
         });
+        
+        //dtm.fireTableDataChanged();
+        
     }
+
+    
 @Override
     public void list() {
         super.list(); //To change body of generated methods, choose Tools | Templates.
@@ -178,4 +195,6 @@ private void ucitaj() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblKupci;
     // End of variables declaration//GEN-END:variables
+
+    
 }

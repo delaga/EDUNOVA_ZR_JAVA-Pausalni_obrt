@@ -7,6 +7,10 @@ package zavrsnirad.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -15,18 +19,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import zavrsnirad.controller.ObradaKlijent_kupac;
+import zavrsnirad.model.Klijent_kupac;
+import zavrsnirad.utility.DelagaException;
 
 /**
  *
  * @author mirza
  */
 public class ViewKlijentKupac extends javax.swing.JFrame {
-
+        private ObradaKlijent_kupac obrada;
+        private ViewKlijentiLista klijenti;
+        
     /**
      * Creates new form KlijentKupac
      */
-    public ViewKlijentKupac() {
+    public ViewKlijentKupac(ViewKlijentiLista kl) {
         initComponents();
+        this.klijenti=kl;
     }
 
     /**
@@ -238,7 +248,25 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOibJmbgActionPerformed
 
     private void btnDodajActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        // TODO add your handling code here:
+        Klijent_kupac kk= new Klijent_kupac();
+        kk.setNaziv(txtNaziv.getText());
+        kk.setAdresa(txtAdresa.getText());
+        kk.setDrzava(txtDrzava.getText());
+        kk.setOib_jmbg(txtOibJmbg.getText());
+        kk.setGrad(txtGrad.getText());
+        kk.setPost_broj(txtPostanskiBroj.getText());
+        kk.setVrijemeKreiranja(Date.valueOf(LocalDate.now()));
+        kk.setVrijemePromjene(Date.valueOf(LocalDate.now()));
+        obrada=new ObradaKlijent_kupac();
+            try {
+                obrada.spremi(kk);
+            } catch (DelagaException ex) {
+                ex.printStackTrace();
+            }
+            //klijenti.repaint(1);
+            
+            klijenti.ucitaj();
+            dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnSpremiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed

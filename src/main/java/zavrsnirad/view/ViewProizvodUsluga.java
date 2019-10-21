@@ -5,6 +5,7 @@
  */
 package zavrsnirad.view;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -221,7 +222,7 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
     private void spremi(Usluga_proizvod up) {
         
         up.setNaziv(txtNaziv.getText());
-        up.setCijena(Double.parseDouble(txtCijena.getText()));
+        up.setCijena(BigDecimal.valueOf(BigDecimal.parseBigDecimal(txtCijena.getText())) );
               
         up.setJedinica_mjere(txtJedinicnaMjera.getText());
         up.setOpis(txtOpis.getText());

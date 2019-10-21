@@ -5,6 +5,8 @@
  */
 package zavrsnirad.view;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.swing.ButtonGroup;
 import org.mindrot.jbcrypt.BCrypt;
 import zavrsnirad.controller.ObradaKorisnik;
@@ -222,6 +224,8 @@ public class ViewKorisnik extends javax.swing.JFrame {
         k.setLozinka(BCrypt.hashpw(pswLozinka.toString(), BCrypt.gensalt()));
         if(rbAdmin.isSelected()) k.isAdmin();
         k.setMobitel(txtMobitel.getText());
+        k.setVrijemeKreiranja(Date.valueOf(LocalDate.now()));
+        k.setVrijemePromjene(Date.valueOf(LocalDate.now()));
         ObradaKorisnik obrada=new ObradaKorisnik();
         try {
             k = obrada.spremi(k);

@@ -21,3 +21,22 @@ Entitet: if(vK==null) then vK = vP
    
    
    sve double u BigDecimal
+
+Dio III
+    1. BigDecimal je sve uneredio
+    2. NoviRacun->spremi: ne radi
+    3. Novi(Klijent,Korisnik,Usluga_proizvod)->ne prikazuj duple vrijednosti
+    
+NAPRAVITI:
+1. Korisnik: Novi,Update,Delete
+2. Proizvod: Update,Delete
+3. Racun: Update,Delete(Aktivan=false)
+           Prikazi samo Aktivan=true
+4. TecajnaLista:konverzija
+5. ViewRacun: Iznos, izracunaj nakon unosa kolicine. 
+              Preracunaj nakon unosa rabata.
+6. SVE: kontrole
+        Upozorenja(JOP)
+7. PodaciOObrtu:dodaj logo iz filea
+8. Podaci OServeru: spremi
+9. 2*XLS i 1* PDF

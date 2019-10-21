@@ -162,10 +162,10 @@ public class Racun extends Entitet implements Serializable{
     public BigDecimal getIznos_racuna() {
         
         BigDecimal ukupno = BigDecimal.ZERO;
-        double stavkaIznos;
+        BigDecimal stavkaIznos;
         for (Stavka s : stavke) {
-             stavkaIznos = s.getKolicina() * s.getProizvod().getCijena();
-            ukupno = ukupno.add(new BigDecimal(stavkaIznos));
+             stavkaIznos = s.getKolicina().multiply(s.getProizvod().getCijena());
+            ukupno = ukupno.add(stavkaIznos);
         }
 
 

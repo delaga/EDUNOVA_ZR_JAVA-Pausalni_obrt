@@ -7,6 +7,7 @@ package zavrsnirad.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -32,7 +33,11 @@ public class Stavka extends Entitet implements Serializable {
     }
 
     public BigDecimal getIznosStavke() {
-        BigDecimal iznosStavke = getKolicina() * getProizvod().getCijena()*((100-getRabat())/100);
+        BigDecimal iznosStavke = getKolicina().multiply(getProizvod().getCijena());
+        BigDecimal sto = new BigDecimal(100);
+        BigDecimal t = sto.subtract(getRabat());
+        t=t.divide(sto);
+        iznosStavke=iznosStavke.multiply(t);
         return iznosStavke;
     }
 

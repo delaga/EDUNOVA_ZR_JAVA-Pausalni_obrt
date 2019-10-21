@@ -5,6 +5,7 @@
  */
 package zavrsnirad.view;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -49,7 +50,7 @@ public class ViewRacun extends javax.swing.JFrame {
         initComponents();
         this.glavni = r;
         this.r = glavni.getOdabraniRacun();
-        
+        obradaRacun = new ObradaRacun();
         ucitajUsluge();
         ucitajKlijenteKupce();
 
@@ -636,11 +637,11 @@ public class ViewRacun extends javax.swing.JFrame {
         Stavka s = new Stavka();
         DefaultTableModel dtm = (DefaultTableModel) tblStavke.getModel();
         s.setProizvod((Usluga_proizvod) cmbStavkaNaziv.getSelectedItem());
-        s.setKolicina(BigDecimal.parseBigDecimal(String.valueOf(spnStavkaKolicina.getValue())));
+        s.setKolicina(new BigDecimal(String.valueOf(spnStavkaKolicina.getValue())));
         if (txtStavkaRabat.getText().trim().length() > 0) {
-            s.setRabat(BigDecimal.parseBigDecimal(txtStavkaRabat.getText()));
+            s.setRabat(new BigDecimal(txtStavkaRabat.getText()));
         } else {
-            s.setRabat(0);
+            s.setRabat(BigDecimal.ZERO);
         }
 
         s.setIznosStavke(s.getIznosStavke());

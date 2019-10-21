@@ -143,6 +143,7 @@ public void ucitaj() {
         //tblKupci.repaint();
         
         DefaultTableModel dtm = (DefaultTableModel) tblKupci.getModel();
+        dtm.setRowCount(0);
         //dtm.fireTableDataChanged();
         List<Klijent_kupac>kupci=obrada.getEntiteti();
         String[] colNames = {"Naziv", "Adresa", "Poštanski broj", "Grad", "Država", "OIB ili JMBG","Vrijeme kreiranja","Vrijeme promjene"};

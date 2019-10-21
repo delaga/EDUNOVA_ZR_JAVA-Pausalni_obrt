@@ -222,7 +222,7 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
     private void spremi(Usluga_proizvod up) {
         
         up.setNaziv(txtNaziv.getText());
-        up.setCijena(BigDecimal.valueOf(BigDecimal.parseBigDecimal(txtCijena.getText())) );
+        up.setCijena(new BigDecimal(txtCijena.getText()) );
               
         up.setJedinica_mjere(txtJedinicnaMjera.getText());
         up.setOpis(txtOpis.getText());

@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import zavrsnirad.controller.ObradaKorisnik;
 import zavrsnirad.model.Korisnik;
+import zavrsnirad.model.Racun;
 import zavrsnirad.model.Usluga_proizvod;
 
 /**
@@ -19,6 +20,7 @@ import zavrsnirad.model.Usluga_proizvod;
  */
 public class ViewKorisnici extends javax.swing.JFrame {
     private ObradaKorisnik obrada;
+    public Korisnik odabraniKorisnik;
     /**
      * Creates new form ViewKorisnici
      */
@@ -27,19 +29,30 @@ public class ViewKorisnici extends javax.swing.JFrame {
         obrada=new ObradaKorisnik();
         ucitaj();
     }
+
+    public Korisnik getOdabraniKorisnik() {
+        return odabraniKorisnik;
+    }
         private void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblKorisnici.getModel();
         List<Korisnik> korisnici = obrada.getEntiteti();
-        String[] colNames = {"Ime", "Prezime", "E-mail", "Lozinka", "Telefon/Mobitel", "URL_potpisa","Vrijeme kreiranja", "Vrijeme promjene"};
+        String[] colNames = {"objekt","Ime", "Prezime", "E-mail", "Lozinka", "Telefon/Mobitel", "URL_potpisa","Vrijeme kreiranja", "Vrijeme promjene"};
+        
         for (int i = 0; i < colNames.length; i++) {
 
             TableColumn tc = tblKorisnici.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
+            if (i == 0) {
+                tc.setWidth(0);
+                tc.setMinWidth(0);
+                tc.setMaxWidth(0);
+            }
         }
         korisnici.forEach((kor) -> {
             try {
-                String red[] = {
+                Object red[] = {
+                    kor,
                     kor.getIme(),
                     kor.getPrezime(),
                     kor.getEmail(),
@@ -84,7 +97,7 @@ public class ViewKorisnici extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
         jScrollPane2.setViewportView(tblKorisnici);
@@ -162,11 +175,14 @@ public class ViewKorisnici extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        new ViewKorisnik().setVisible(true);
+        Korisnik odabraniKorisnik=new Korisnik();
+        new ViewKorisnik(odabraniKorisnik).setVisible(true);
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
-        // TODO add your handling code here:
+        System.out.println(tblKorisnici.getSelectedRow());
+        odabraniKorisnik = (Korisnik) tblKorisnici.getValueAt(tblKorisnici.getSelectedRow(), 0);
+        new ViewKorisnik(odabraniKorisnik).setVisible(true);
     }//GEN-LAST:event_btnUrediActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed

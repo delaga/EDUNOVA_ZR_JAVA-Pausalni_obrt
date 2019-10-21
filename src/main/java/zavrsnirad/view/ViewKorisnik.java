@@ -18,15 +18,18 @@ import zavrsnirad.utility.DelagaException;
  * @author mirza
  */
 public class ViewKorisnik extends javax.swing.JFrame {
-
+    private Korisnik odabraniKorisnik;
+   // private ViewKlijentiLista kl;
     /**
      * Creates new form ViewKorisnik
      */
-    public ViewKorisnik() {
+    public ViewKorisnik(Korisnik k) {
         initComponents();
+        this.odabraniKorisnik=k;
         ButtonGroup group = new ButtonGroup();
         group.add(rbKorisnik);
         group.add(rbAdmin);
+        
     }
 
     /**

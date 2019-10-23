@@ -25,21 +25,27 @@ import zavrsnirad.utility.DelagaException;
 public class ViewProizvodUsluga extends javax.swing.JFrame {
     private ObradaUsluga_proizvod obrada;
     private ViewProizvodLista listaUslugaProizvoda;
-    private Usluga_proizvod up;
+    private Usluga_proizvod odabraniProizvod;
     
 
     /**
      * Creates new form ProizvodUsluga
      */
-    public ViewProizvodUsluga(ViewProizvodLista up) {
-        initComponents();
-        this.listaUslugaProizvoda=up;
-        this.up=listaUslugaProizvoda.getOdabranaUslugaProizvod();
+    public ViewProizvodUsluga(ViewProizvodLista pl) {
         obrada=new ObradaUsluga_proizvod();
-        if(this.up.getId()==null){
+        initComponents();
+        this.listaUslugaProizvoda=pl;
+        this.odabraniProizvod=listaUslugaProizvoda.getOdabranaUslugaProizvod();
+        //this.odabraniProizvod=listaUslugaProizvoda.getOdabranaUslugaProizvod();
         
+        if(this.odabraniProizvod.getId()!=null){
+            //txtNaziv.setText(up.getNaziv());
+            //txtCijena.setText(up.getCijena().toString());
+            //txtJedinicnaMjera.setText(up.getJedinica_mjere());
+            //txtOpis.setText(up.getOpis());
+              ucitajUsluguProizvod(listaUslugaProizvoda.getOdabranaUslugaProizvod());
         }else{
-            ucitajUsluguProizvod();
+            
         }
     }
 
@@ -190,6 +196,8 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         Usluga_proizvod up=new Usluga_proizvod();
         spremi(up);
+        listaUslugaProizvoda.ucitaj();
+        dispose();
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnSpremiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
@@ -233,10 +241,11 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
         } catch (DelagaException ex) {
             Logger.getLogger(ViewProizvodUsluga.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        listaUslugaProizvoda.ucitaj();
+        dispose();
     }
 
-    private void ucitajUsluguProizvod() {
+    private void ucitajUsluguProizvod(Usluga_proizvod up) {
         txtNaziv.setText(up.getNaziv());
         txtCijena.setText(up.getCijena().toString());
         txtJedinicnaMjera.setText(up.getJedinica_mjere());

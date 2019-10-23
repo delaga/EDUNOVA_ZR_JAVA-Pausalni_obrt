@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.apache.poi.hssf.util.CellReference;
@@ -27,6 +28,7 @@ import zavrsnirad.controller.ObradaRacun;
 import zavrsnirad.model.Klijent_kupac;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.model.Racun;
+import zavrsnirad.utility.DelagaException;
 import zavrsnirad.utility.Utils;
 
 /**
@@ -359,6 +361,7 @@ public class ViewGlavni extends javax.swing.JFrame {
 public void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblRacuni.getModel();
+        dtm.setRowCount(0);
         List<Racun> racuni = obrada.getEntiteti();
         String[] colNames = {"objekt", "Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
         
@@ -436,7 +439,33 @@ public void ucitaj() {
         super.list(); //To change body of generated methods, choose Tools | Templates.
     }
     private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
-        // TODO add your handling code here:
+        odabraniRacun = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
+        if(odabraniRacun==null){
+            JOptionPane.showMessageDialog(null, "Prvo odaberite korisnika");
+            return;
+
+        }
+        /*
+        if(s.getGrupe().size()>0){
+            JOptionPane.showMessageDialog(null, "Ne možete obrisati ovu grupu");
+            return;
+        }
+        */
+        if(JOptionPane.showConfirmDialog(
+            null, //roditelj, bude null
+            "Sigurno obrisati" + odabraniRacun.getBroj_racuna(), //tijelo dijaloga
+            "Brisanje smjera", // naslov
+            JOptionPane.YES_NO_OPTION, //vrsta opcija
+            JOptionPane.QUESTION_MESSAGE) //ikona
+        ==JOptionPane.NO_OPTION){
+        return;
+        }
+        try {
+            obrada.brisi(odabraniRacun);
+        } catch (DelagaException ex) {
+            ex.printStackTrace();
+        }
+        this.ucitaj();
     }//GEN-LAST:event_btnObrišiActionPerformed
 
     private void jMenuObrtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuObrtActionPerformed

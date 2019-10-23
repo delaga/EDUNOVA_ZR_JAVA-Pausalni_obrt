@@ -35,17 +35,19 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
     /**
      * Creates new form KlijentKupac
      */
-    public ViewKlijentKupac(Klijent_kupac kk) {
+    public ViewKlijentKupac(ViewKlijentiLista kl) {
         initComponents();
         obradaKlijent=new ObradaKlijent_kupac();
-        this.odbraniKlijent=kk;
-        if(kk.getId()!=null){
-            txtNaziv.setText(kk.getNaziv());
-            txtAdresa.setText(kk.getAdresa());
-            txtPostanskiBroj.setText(kk.getPost_broj());
-            txtGrad.setText(kk.getGrad());
-            txtDrzava.setText(kk.getDrzava());
-            txtOibJmbg.setText(kk.getOib_jmbg());
+        this.klijenti=kl;
+        this.odbraniKlijent=klijenti.getOdabraniKlijent();
+        
+        if(odbraniKlijent.getId()!=null){
+            txtNaziv.setText(odbraniKlijent.getNaziv());
+            txtAdresa.setText(odbraniKlijent.getAdresa());
+            txtPostanskiBroj.setText(odbraniKlijent.getPost_broj());
+            txtGrad.setText(odbraniKlijent.getGrad());
+            txtDrzava.setText(odbraniKlijent.getDrzava());
+            txtOibJmbg.setText(odbraniKlijent.getOib_jmbg());
         }
         
     }

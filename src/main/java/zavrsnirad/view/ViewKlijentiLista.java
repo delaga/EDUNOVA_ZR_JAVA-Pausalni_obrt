@@ -155,8 +155,8 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviActionPerformed
-       Klijent_kupac odabraniKlijent=new  Klijent_kupac();
-        new ViewKlijentKupac(odabraniKlijent).setVisible(true);
+        odabraniKlijent=new  Klijent_kupac();
+        new ViewKlijentKupac(this).setVisible(true);
     }//GEN-LAST:event_btnNoviActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
@@ -191,7 +191,7 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
         odabraniKlijent = (Klijent_kupac) tblKupci.getValueAt(tblKupci.getSelectedRow(), 0);
-        new ViewKlijentKupac(odabraniKlijent).setVisible(true);
+        new ViewKlijentKupac(this).setVisible(true);
     }//GEN-LAST:event_btnUrediActionPerformed
 
     public void setKlijenti(ViewKlijentiLista klijenti) {

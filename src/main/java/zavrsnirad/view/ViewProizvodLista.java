@@ -22,6 +22,10 @@ public class ViewProizvodLista extends javax.swing.JFrame {
     private ObradaUsluga_proizvod obrada;
     private Usluga_proizvod odabranaUslugaProizvod;
 
+    public void setOdabranaUslugaProizvod(Usluga_proizvod odabranaUslugaProizvod) {
+        this.odabranaUslugaProizvod = odabranaUslugaProizvod;
+    }
+
     public Usluga_proizvod getOdabranaUslugaProizvod() {
         return odabranaUslugaProizvod;
     }
@@ -36,7 +40,7 @@ public class ViewProizvodLista extends javax.swing.JFrame {
         ucitaj();
     }
 
-    private void ucitaj() {
+    public void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblProizvodiUsluge.getModel();
         dtm.setRowCount(0);
@@ -195,7 +199,7 @@ public class ViewProizvodLista extends javax.swing.JFrame {
         } catch (DelagaException e) {
             
         }
-        
+        this.ucitaj();
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     /**

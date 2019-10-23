@@ -46,9 +46,9 @@ public class ViewRacun extends javax.swing.JFrame {
     /**
      * Creates new form ViewRacun
      */
-    public ViewRacun(ViewGlavni r) {
+    public ViewRacun(ViewGlavni vg) {
         initComponents();
-        this.glavni = r;
+        this.glavni = vg;
         this.r = glavni.getOdabraniRacun();
         obradaRacun = new ObradaRacun();
         ucitajUsluge();
@@ -345,6 +345,12 @@ public class ViewRacun extends javax.swing.JFrame {
 
         jLabel14.setText("Količina");
 
+        spnStavkaKolicina.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnStavkaKolicinaStateChanged(evt);
+            }
+        });
+
         jLabel15.setText("Rabat (%)");
 
         txtStavkaRabat.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +360,11 @@ public class ViewRacun extends javax.swing.JFrame {
         });
 
         txtStavkaIznos.setEnabled(false);
+        txtStavkaIznos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStavkaIznosActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("IZNOS");
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -764,8 +775,16 @@ public class ViewRacun extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUkupnoActionPerformed
 
     private void txtStavkaRabatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStavkaRabatActionPerformed
-
+        //preracunajIznosStavke();
     }//GEN-LAST:event_txtStavkaRabatActionPerformed
+
+    private void spnStavkaKolicinaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnStavkaKolicinaStateChanged
+        //preracunajIznosStavke();
+    }//GEN-LAST:event_spnStavkaKolicinaStateChanged
+
+    private void txtStavkaIznosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStavkaIznosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStavkaIznosActionPerformed
     private void ucitajKlijenteKupce() {
 
         DefaultComboBoxModel<Klijent_kupac> mod = new DefaultComboBoxModel<>();
@@ -877,6 +896,16 @@ public class ViewRacun extends javax.swing.JFrame {
         });
         cmbStavkaNaziv.setModel(m);
 
+    }
+
+    private void preracunajIznosStavke() {
+//        BigDecimal cijena=(new BigDecimal(txtStavkaCijena.getText()));
+//        BigDecimal kolicina=(new BigDecimal(spnStavkaKolicina.getValue().toString()));
+//        BigDecimal rabat=(new BigDecimal(txtStavkaRabat.getText()));
+//        BigDecimal sto=(new BigDecimal("100"));
+//        BigDecimal jedan=(new BigDecimal("1"));
+//        BigDecimal rezultat=(cijena.multiply(kolicina)).multiply(jedan.subtract(rabat.divide(sto)));
+//        txtStavkaIznos.setText(rezultat.toString());
     }
 
 }

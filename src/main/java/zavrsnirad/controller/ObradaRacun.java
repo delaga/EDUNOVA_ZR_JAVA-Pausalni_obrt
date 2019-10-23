@@ -28,7 +28,7 @@ public class ObradaRacun extends Obrada<Racun>{
 
     @Override
     protected void kontrolaBrisi(Racun entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override

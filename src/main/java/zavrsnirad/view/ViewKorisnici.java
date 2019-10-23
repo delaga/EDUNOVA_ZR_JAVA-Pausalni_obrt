@@ -25,6 +25,15 @@ import zavrsnirad.utility.DelagaException;
 public class ViewKorisnici extends javax.swing.JFrame {
     private ObradaKorisnik obrada;
     public Korisnik odabraniKorisnik;
+    public ViewKorisnici listaKorisnika;
+
+    public ViewKorisnici getListaKorisnika() {
+        return listaKorisnika;
+    }
+
+    public void setListaKorisnika(ViewKorisnici listaKorisnika) {
+        this.listaKorisnika = listaKorisnika;
+    }
     /**
      * Creates new form ViewKorisnici
      */
@@ -37,7 +46,7 @@ public class ViewKorisnici extends javax.swing.JFrame {
     public Korisnik getOdabraniKorisnik() {
         return odabraniKorisnik;
     }
-        private void ucitaj() {
+        public void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblKorisnici.getModel();
         dtm.setRowCount(0);

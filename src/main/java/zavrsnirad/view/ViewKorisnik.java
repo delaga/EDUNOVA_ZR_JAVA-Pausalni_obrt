@@ -21,6 +21,7 @@ import zavrsnirad.utility.DelagaException;
 public class ViewKorisnik extends javax.swing.JFrame {
     private Korisnik odabraniKorisnik;
     private ObradaKorisnik obradaKorisnik;
+    private ViewKorisnici listaKorisnika;
    // private ViewKlijentiLista kl;
     /**
      * Creates new form ViewKorisnik
@@ -29,6 +30,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
         obradaKorisnik= new ObradaKorisnik();
         initComponents();
         this.odabraniKorisnik=k;
+        
         ButtonGroup group = new ButtonGroup();
         group.add(rbKorisnik);
         group.add(rbAdmin);
@@ -276,7 +278,8 @@ public class ViewKorisnik extends javax.swing.JFrame {
         } catch (DelagaException e) {
             e.printStackTrace();
         }
-        
+        listaKorisnika.ucitaj();
+        dispose();
         
     }//GEN-LAST:event_btnDodajActionPerformed
 

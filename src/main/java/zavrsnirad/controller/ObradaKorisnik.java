@@ -99,7 +99,7 @@ public class ObradaKorisnik extends Obrada<Korisnik>{
 
     @Override
     protected void kontrolaBrisi(Korisnik entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override

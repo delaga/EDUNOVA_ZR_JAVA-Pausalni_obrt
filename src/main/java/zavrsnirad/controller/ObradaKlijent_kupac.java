@@ -64,7 +64,7 @@ public class ObradaKlijent_kupac extends Obrada<Klijent_kupac>{
 
     @Override
     protected void kontrolaBrisi(Klijent_kupac entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override

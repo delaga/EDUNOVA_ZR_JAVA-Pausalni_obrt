@@ -7,12 +7,16 @@ package zavrsnirad.view;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import zavrsnirad.controller.ObradaKorisnik;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.model.Racun;
 import zavrsnirad.model.Usluga_proizvod;
+import zavrsnirad.utility.DelagaException;
 
 /**
  *
@@ -36,6 +40,7 @@ public class ViewKorisnici extends javax.swing.JFrame {
         private void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblKorisnici.getModel();
+        dtm.setRowCount(0);
         List<Korisnik> korisnici = obrada.getEntiteti();
         String[] colNames = {"objekt","Ime", "Prezime", "E-mail", "Lozinka", "Telefon/Mobitel", "URL_potpisa","Vrijeme kreiranja", "Vrijeme promjene"};
         
@@ -186,7 +191,33 @@ public class ViewKorisnici extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUrediActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        // TODO add your handling code here:
+        odabraniKorisnik = (Korisnik) tblKorisnici.getValueAt(tblKorisnici.getSelectedRow(), 0);
+         if(odabraniKorisnik==null){
+            JOptionPane.showMessageDialog(null, "Prvo odaberite korisnika");
+            return;
+
+        }
+        /*
+        if(s.getGrupe().size()>0){
+            JOptionPane.showMessageDialog(null, "Ne možete obrisati ovu grupu");
+            return;
+        }
+        */
+        if(JOptionPane.showConfirmDialog(
+            null, //roditelj, bude null
+            "Sigurno obrisati" + odabraniKorisnik.getIme() + " " + odabraniKorisnik.getPrezime(), //tijelo dijaloga
+            "Brisanje smjera", // naslov
+            JOptionPane.YES_NO_OPTION, //vrsta opcija
+            JOptionPane.QUESTION_MESSAGE) //ikona
+        ==JOptionPane.NO_OPTION){
+        return;
+        }
+        try {
+            obrada.brisi(odabraniKorisnik);
+        } catch (DelagaException ex) {
+            ex.printStackTrace();
+        }
+        this.ucitaj();
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     /**

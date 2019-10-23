@@ -28,15 +28,26 @@ import zavrsnirad.utility.DelagaException;
  * @author mirza
  */
 public class ViewKlijentKupac extends javax.swing.JFrame {
-        private ObradaKlijent_kupac obrada;
+        private ObradaKlijent_kupac obradaKlijent;
         private ViewKlijentiLista klijenti;
+        private Klijent_kupac odbraniKlijent;
         
     /**
      * Creates new form KlijentKupac
      */
-    public ViewKlijentKupac(ViewKlijentiLista kl) {
+    public ViewKlijentKupac(Klijent_kupac kk) {
         initComponents();
-        this.klijenti=kl;
+        obradaKlijent=new ObradaKlijent_kupac();
+        this.odbraniKlijent=kk;
+        if(kk.getId()!=null){
+            txtNaziv.setText(kk.getNaziv());
+            txtAdresa.setText(kk.getAdresa());
+            txtPostanskiBroj.setText(kk.getPost_broj());
+            txtGrad.setText(kk.getGrad());
+            txtDrzava.setText(kk.getDrzava());
+            txtOibJmbg.setText(kk.getOib_jmbg());
+        }
+        
     }
 
     /**
@@ -257,9 +268,9 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
         kk.setPost_broj(txtPostanskiBroj.getText());
         kk.setVrijemeKreiranja(Date.valueOf(LocalDate.now()));
         kk.setVrijemePromjene(Date.valueOf(LocalDate.now()));
-        obrada=new ObradaKlijent_kupac();
+        
             try {
-                obrada.spremi(kk);
+                obradaKlijent.spremi(kk);
             } catch (DelagaException ex) {
                 ex.printStackTrace();
             }

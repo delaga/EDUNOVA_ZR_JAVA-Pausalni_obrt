@@ -6,6 +6,7 @@
 package zavrsnirad.view;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.ButtonGroup;
 import org.mindrot.jbcrypt.BCrypt;
@@ -19,16 +20,29 @@ import zavrsnirad.utility.DelagaException;
  */
 public class ViewKorisnik extends javax.swing.JFrame {
     private Korisnik odabraniKorisnik;
+    private ObradaKorisnik obradaKorisnik;
    // private ViewKlijentiLista kl;
     /**
      * Creates new form ViewKorisnik
      */
     public ViewKorisnik(Korisnik k) {
+        obradaKorisnik= new ObradaKorisnik();
         initComponents();
         this.odabraniKorisnik=k;
         ButtonGroup group = new ButtonGroup();
         group.add(rbKorisnik);
         group.add(rbAdmin);
+        SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
+        if(k.getId()!=null) {
+        txtIme.setText(k.getIme());
+        txtPrezime.setText(k.getPrezime());
+        txtEmail.setText(k.getEmail());
+        txtMobitel.setText(k.getMobitel());
+        txtURL_potpisa.setText(k.getPotpis_URL());
+        txtVrKreiranja.setText(df.format(k.getVrijemeKreiranja()));
+        txtVrKPromjene.setText(df.format(k.getVrijemePromjene()));
+        pswLozinka.setText(k.getLozinka());
+        }
         
     }
 
@@ -61,6 +75,8 @@ public class ViewKorisnik extends javax.swing.JFrame {
         pswLozinka = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
         txtMobitel = new javax.swing.JTextField();
+        txtVrKreiranja = new javax.swing.JTextField();
+        txtVrKPromjene = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,6 +121,20 @@ public class ViewKorisnik extends javax.swing.JFrame {
 
         jLabel8.setText("Telefon/Mobitel");
 
+        txtVrKreiranja.setEditable(false);
+        txtVrKreiranja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVrKreiranjaActionPerformed(evt);
+            }
+        });
+
+        txtVrKPromjene.setEditable(false);
+        txtVrKPromjene.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVrKPromjeneActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,10 +142,6 @@ public class ViewKorisnik extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(rbKorisnik)
@@ -149,7 +175,18 @@ public class ViewKorisnik extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtVrKreiranja, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(153, 153, 153)
+                                .addComponent(txtVrKPromjene)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,11 +218,15 @@ public class ViewKorisnik extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbKorisnik)
                     .addComponent(rbAdmin))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
-                .addGap(22, 22, 22))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVrKreiranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtVrKPromjene, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -247,6 +288,14 @@ public class ViewKorisnik extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbKorisnikActionPerformed
 
+    private void txtVrKreiranjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVrKreiranjaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVrKreiranjaActionPerformed
+
+    private void txtVrKPromjeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVrKPromjeneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVrKPromjeneActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,5 +322,11 @@ public class ViewKorisnik extends javax.swing.JFrame {
     private javax.swing.JTextField txtMobitel;
     private javax.swing.JTextField txtPrezime;
     private javax.swing.JTextField txtURL_potpisa;
+    private javax.swing.JTextField txtVrKPromjene;
+    private javax.swing.JTextField txtVrKreiranja;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitaj() {
+        
+    }
 }

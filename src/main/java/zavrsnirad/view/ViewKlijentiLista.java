@@ -7,12 +7,17 @@ package zavrsnirad.view;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import zavrsnirad.controller.Obrada;
 import zavrsnirad.controller.ObradaKlijent_kupac;
 import zavrsnirad.model.Klijent_kupac;
+import zavrsnirad.model.Korisnik;
+import zavrsnirad.utility.DelagaException;
 
 /**
  *
@@ -22,6 +27,15 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
     
     private ObradaKlijent_kupac obrada;
     public ViewKlijentiLista klijenti;
+    public Klijent_kupac odabraniKlijent;
+
+    public Klijent_kupac getOdabraniKlijent() {
+        return odabraniKlijent;
+    }
+
+    public void setOdabraniKlijent(Klijent_kupac odabraniKlijent) {
+        this.odabraniKlijent = odabraniKlijent;
+    }
 
     public ViewKlijentiLista getKlijenti() {
         return klijenti;
@@ -63,7 +77,7 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
         jScrollPane2.setViewportView(tblKupci);
@@ -93,8 +107,18 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
         });
 
         btnUredi.setText("Uredi");
+        btnUredi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUrediActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,9 +155,44 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviActionPerformed
-        
-        new ViewKlijentKupac(this).setVisible(true);
+       Klijent_kupac odabraniKlijent=new  Klijent_kupac();
+        new ViewKlijentKupac(odabraniKlijent).setVisible(true);
     }//GEN-LAST:event_btnNoviActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        try {
+            Klijent_kupac k = (Klijent_kupac) tblKupci.getValueAt(tblKupci.getSelectedRow(), 0);
+            if(k==null){
+                JOptionPane.showMessageDialog(null, "Prvo odaberite klijenta");
+                return;
+                
+            }
+            /*
+            if(s.getGrupe().size()>0){
+            JOptionPane.showMessageDialog(null, "Ne možete obrisati ovu grupu");
+            return;
+            }
+            */
+            if(JOptionPane.showConfirmDialog(
+                    null, //roditelj, bude null
+                    "Sigurno obrisati " + k.getNaziv(), //tijelo dijaloga
+                    "Brisanje smjera", // naslov
+                    JOptionPane.YES_NO_OPTION, //vrsta opcija
+                    JOptionPane.QUESTION_MESSAGE) //ikona
+                    ==JOptionPane.NO_OPTION){
+                return;
+            }
+            obrada.brisi(k);
+        } catch (DelagaException ex) {
+            ex.printStackTrace();
+        }
+        this.ucitaj();
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
+        odabraniKlijent = (Klijent_kupac) tblKupci.getValueAt(tblKupci.getSelectedRow(), 0);
+        new ViewKlijentKupac(odabraniKlijent).setVisible(true);
+    }//GEN-LAST:event_btnUrediActionPerformed
 
     public void setKlijenti(ViewKlijentiLista klijenti) {
         this.klijenti = klijenti;
@@ -146,15 +205,21 @@ public void ucitaj() {
         dtm.setRowCount(0);
         //dtm.fireTableDataChanged();
         List<Klijent_kupac>kupci=obrada.getEntiteti();
-        String[] colNames = {"Naziv", "Adresa", "Poštanski broj", "Grad", "Država", "OIB ili JMBG","Vrijeme kreiranja","Vrijeme promjene"};
+        String[] colNames = {"object","Naziv", "Adresa", "Poštanski broj", "Grad", "Država", "OIB ili JMBG","Vrijeme kreiranja","Vrijeme promjene"};
         for (int i = 0; i < colNames.length; i++) {
 
             TableColumn tc = tblKupci.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
+            if (i == 0) {
+                tc.setWidth(0);
+                tc.setMinWidth(0);
+                tc.setMaxWidth(0);
+            }
         }
         kupci.forEach((k) -> {
             try {
-                String red[] = {
+                Object red[] = {
+                    k,
                     k.getNaziv(),
                     k.getAdresa(),
                     k.getPost_broj(),

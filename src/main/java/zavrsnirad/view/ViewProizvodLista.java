@@ -39,6 +39,7 @@ public class ViewProizvodLista extends javax.swing.JFrame {
     private void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblProizvodiUsluge.getModel();
+        dtm.setRowCount(0);
         List<Usluga_proizvod> kupci = obrada.getEntiteti();
         String[] colNames = {"Naziv", "Opis", "Jed. mjera", "Cijena", "Vrijeme kreiranja", "Vrijeme promjene"};
         for (int i = 0; i < colNames.length; i++) {

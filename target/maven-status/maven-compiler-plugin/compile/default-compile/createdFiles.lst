@@ -54,6 +54,7 @@ zavrsnirad\view\ViewKlijentKupac$7.class
 zavrsnirad\view\ViewRacun$2.class
 zavrsnirad\view\Kalkulator$8.class
 zavrsnirad\view\ViewKlijentiLista.class
+zavrsnirad\view\ViewKlijentiLista$3.class
 zavrsnirad\view\ViewRacun$12.class
 zavrsnirad\view\ViewRacun$11.class
 zavrsnirad\testingDumine\TestKlijent_kupac.class
@@ -63,6 +64,7 @@ zavrsnirad\controller\ObradaUsluga_proizvod.class
 zavrsnirad\view\ViewKlijentKupac.class
 zavrsnirad\view\Kalkulator$1.class
 zavrsnirad\view\SplashScreen$Ucitavanje.class
+zavrsnirad\view\ViewKlijentiLista$2.class
 zavrsnirad\view\ViewKlijentKupac$1.class
 zavrsnirad\controller\ObradaRacun.class
 zavrsnirad\view\Kalkulator$9.class
@@ -81,6 +83,7 @@ zavrsnirad\view\ViewRacun$14.class
 zavrsnirad\view\Kalkulator$3.class
 zavrsnirad\view\SplashScreen.class
 zavrsnirad\view\ViewKorisnici$2.class
+zavrsnirad\view\ViewKorisnik$4.class
 zavrsnirad\view\ViewProizvodLista$2.class
 zavrsnirad\view\ViewTecajnaLista.class
 zavrsnirad\view\Kalkulator$16.class
@@ -89,6 +92,7 @@ zavrsnirad\view\ViewRacun$5.class
 zavrsnirad\controller\Obrada.class
 zavrsnirad\view\Kalkulator.class
 zavrsnirad\view\ViewGlavni$3.class
+zavrsnirad\view\ViewKorisnik$5.class
 zavrsnirad\view\ViewAutorizacija$1.class
 zavrsnirad\model\Tecaj.class
 zavrsnirad\view\ViewProizvodLista.class

@@ -669,7 +669,7 @@ public class ViewRacun extends javax.swing.JFrame {
         };
         dtm.addRow(red);
         tblStavke.repaint();
-
+        txtStavkaIznos.setText(s.getIznosStavke().toString());
 
     }//GEN-LAST:event_btnStavkaDodajActionPerformed
 
@@ -775,7 +775,8 @@ public class ViewRacun extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUkupnoActionPerformed
 
     private void txtStavkaRabatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStavkaRabatActionPerformed
-        //preracunajIznosStavke();
+        Stavka s=new Stavka();
+        txtStavkaIznos.setText(s.getIznosStavke().toString());
     }//GEN-LAST:event_txtStavkaRabatActionPerformed
 
     private void spnStavkaKolicinaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnStavkaKolicinaStateChanged

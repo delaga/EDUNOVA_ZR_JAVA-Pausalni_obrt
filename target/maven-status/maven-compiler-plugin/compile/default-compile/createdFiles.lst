@@ -17,6 +17,7 @@ zavrsnirad\view\ViewGlavni$10.class
 zavrsnirad\view\ViewGlavni.class
 zavrsnirad\view\ViewKorisnici$1.class
 zavrsnirad\view\ViewRacun$1.class
+zavrsnirad\view\ViewTecajnaLista$4.class
 zavrsnirad\view\ViewKlijentKupac$8.class
 zavrsnirad\view\ViewGlavni$2.class
 zavrsnirad\view\ViewKlijentKupac$5.class
@@ -89,6 +90,7 @@ zavrsnirad\view\ViewKorisnik$4.class
 zavrsnirad\view\ViewProizvodLista$2.class
 zavrsnirad\view\ViewTecajnaLista.class
 zavrsnirad\view\Kalkulator$16.class
+zavrsnirad\view\ViewTecajnaLista$3.class
 zavrsnirad\view\ViewDBserverPodaci.class
 zavrsnirad\view\ViewRacun$5.class
 zavrsnirad\controller\Obrada.class

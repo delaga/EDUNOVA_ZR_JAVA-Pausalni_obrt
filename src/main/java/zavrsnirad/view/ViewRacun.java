@@ -739,8 +739,7 @@ public class ViewRacun extends javax.swing.JFrame {
                 = (DefaultComboBoxModel<Usluga_proizvod>) cmbStavkaNaziv.getModel();
 
         for (int i = 0; i < mp.getSize(); i++) {
-            if (mp.getElementAt(i).getId().equals(
-                    s.getProizvod().getId())) {
+            if (mp.getElementAt(i).getId().equals(s.getProizvod().getId())) {
                 cmbStavkaNaziv.setSelectedIndex(i);
                 break;
             }
